@@ -1,0 +1,85 @@
+Welcome to Islands Missile Invasion, a turn based strategy game. Your goal is to conquer the enemy's island. 
+
+There a two phases in the game: The Build Phase and the Attack Phase.
+
+In the Build Phase you can construct buildings, on empty tiles, which manufacture weapons. You cannot build on craters. 
+
+Buildings you can construct:
+
+1- Missile silo.
+Constructs Missiles 
+Construction time: 1 turn
+
+2- Shield generator.
+Constructs a Shield
+Construction time: 2 turns
+
+3- Power plant.
+Powers all buildings. Without at least one power plant all other buildings will stop working and you will not be able to attack.
+Construction time: 2 turns
+
+4- Airfield
+Constructs Air strike.
+Construction time: 3 turns
+
+5- Laboratory
+Constructs Spy satellite.
+Construction time: 2 turns
+
+6- Factory  
+Constructs Artillery strike.
+Construction time: 3 turns
+
+In the Attack Phase you can fire your weapons at the enemy's island.
+
+1- Missiles
+Fires at 1 enemy tile.
+Production time: 1 turns
+Need: Power plant + Missile silo. 
+
+2- Shield
+Shields 5 tiles against attack
+Production time: 3 turns
+Lasts for: 2 turns
+Need: Power plant + Shield generator.
+You cannot shield a shield generator.
+
+3- Air strike
+Fires at 6 enemy tiles.
+Production time: 2 turns
+Need: Power plant + Airfield.
+
+4- Artillery strike
+Fires at 4 enemy tiles.
+Production time: 2 turns
+Need: Power plant + Factory.
+
+5- Spy satellite 
+Uncovers 5 enemy tiles.
+Production time: 3 turns
+Lasts for: 3 turns
+Need: Power plant + Lab.
+
+6- Nuke 
+Fires at 12 enemy tiles.
+Production time: 3 turns
+Need: Power plant + Missile silo 
++ Factory + Airfield + Lab.
+
+Tile colors:
+
+Light Blue: Unknown
+Dark blue: Missed (but maybe a shielded building)
+Red: Hit (building not destroyed)
+Green: Building destroyed
+
+After reaching the required score or when there is no more room for a power plant the game is over.
+
+Keys:
+
+Move up: 2
+Move down: 8
+Move right: 6
+Move left: 4
+Select/Build/Fire: 5
+Map view: 0
