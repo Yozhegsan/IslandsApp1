@@ -31,7 +31,9 @@ namespace IslandsApp1
         int flamesCounter = 0;
         int explosionsCounter = 0;
         Bitmap[] Krater = new Bitmap[3];
-
+        List<Point> ValidPlace = new List<Point>();
+        bool ValidCursorFlag = false;
+        int FPS = 30;
         //#################################################################################
         private void WriteFile()
         {
@@ -46,7 +48,7 @@ namespace IslandsApp1
 
         private void RedValidPlaces()
         {
-            List<Point> ValidPlace = new List<Point>();
+            
             try
             {
                 string[] separatingStrings = { Environment.NewLine };
@@ -111,6 +113,7 @@ namespace IslandsApp1
 
 
             tmrFlames.Enabled = true;
+            tmrMain.Interval = 1000 / 15;
             tmrMain.Enabled = true;
         }
 
@@ -161,7 +164,6 @@ namespace IslandsApp1
         
         private void PaintLevel(byte[] LevelMas)
         {
-            string st = "";
             finalImage = new Bitmap(600, 600);
             using (Graphics g = Graphics.FromImage(finalImage))
             {
@@ -171,9 +173,8 @@ namespace IslandsApp1
                 for(int i = 0; i < 460; i++)
                 {
                     g.DrawImage(bmpMas[LevelMas[i]], new Rectangle(k * 24, n * 24, 24, 24));
-                    st += LevelMas[i].ToString("00 ");
                     k++;
-                    if (k == 23) { k = 0; n++; st += Environment.NewLine; }
+                    if (k == 23) { k = 0; n++; }
                 }
                 foreach(Point p in KraterTiles)
                     g.DrawImage(Krater[lstMap.SelectedIndex], new Rectangle(p.X, p.Y, 48, 24));
@@ -186,19 +187,21 @@ namespace IslandsApp1
                     GC.Collect();
                 }
 
-                if (IsKursorValid(KursorX, KursorY))
+                if (ValidCursorFlag)
                     g.DrawImage(Kursor[0], new Rectangle(KursorX, KursorY, 48, 24));
                 else
                     g.DrawImage(Kursor[1], new Rectangle(KursorX, KursorY, 48, 24));
             }
             pic.Image = finalImage;
-            txtMap.Text = st;
             GC.Collect();
         }
 
         private bool IsKursorValid(int x,int y)
         {
-            return true; //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            Point tmp = new Point(x, y);
+            if (ValidPlace.Contains(tmp))
+                return true;
+            return false; 
         }
 
         private void lstMap_SelectedIndexChanged(object sender, EventArgs e)
@@ -218,11 +221,6 @@ namespace IslandsApp1
             flamesCounter++;
             if (flamesCounter == 4) flamesCounter = 0;
             GC.Collect();
-        }
-
-        private void btnRandomMap_Click(object sender, EventArgs e)
-        {
-            RandomMap();
         }
 
         private void RandomMap()
@@ -283,8 +281,7 @@ namespace IslandsApp1
                     KraterTiles.Add(new Point(KursorX, KursorY));
                 }
             }
-
-            lblKursorPos.Text = "x = " + KursorX + " (" + (KursorX / 24).ToString() + ")" + Environment.NewLine + "y = " + KursorY + " (" + (KursorY / 24).ToString() + ")";
+            ValidCursorFlag = IsKursorValid(KursorX, KursorY);
         }
 
         private void tmrMain_Tick(object sender, EventArgs e)

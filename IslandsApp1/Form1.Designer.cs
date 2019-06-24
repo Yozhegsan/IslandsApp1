@@ -34,10 +34,7 @@
             this.lstIsland = new System.Windows.Forms.ListBox();
             this.picFlames = new System.Windows.Forms.PictureBox();
             this.tmrFlames = new System.Windows.Forms.Timer(this.components);
-            this.btnRandomMap = new System.Windows.Forms.Button();
-            this.txtMap = new System.Windows.Forms.TextBox();
             this.tmrMain = new System.Windows.Forms.Timer(this.components);
-            this.lblKursorPos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFlames)).BeginInit();
             this.SuspendLayout();
@@ -83,47 +80,16 @@
             // 
             this.tmrFlames.Tick += new System.EventHandler(this.tmrFlames_Tick);
             // 
-            // btnRandomMap
-            // 
-            this.btnRandomMap.Enabled = false;
-            this.btnRandomMap.Location = new System.Drawing.Point(12, 162);
-            this.btnRandomMap.Name = "btnRandomMap";
-            this.btnRandomMap.Size = new System.Drawing.Size(75, 45);
-            this.btnRandomMap.TabIndex = 5;
-            this.btnRandomMap.Text = "Випадкова карта";
-            this.btnRandomMap.UseVisualStyleBackColor = true;
-            this.btnRandomMap.Click += new System.EventHandler(this.btnRandomMap_Click);
-            // 
-            // txtMap
-            // 
-            this.txtMap.Enabled = false;
-            this.txtMap.Location = new System.Drawing.Point(686, 12);
-            this.txtMap.Multiline = true;
-            this.txtMap.Name = "txtMap";
-            this.txtMap.Size = new System.Drawing.Size(388, 374);
-            this.txtMap.TabIndex = 6;
-            // 
             // tmrMain
             // 
+            this.tmrMain.Interval = 500;
             this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
-            // 
-            // lblKursorPos
-            // 
-            this.lblKursorPos.AutoSize = true;
-            this.lblKursorPos.Location = new System.Drawing.Point(12, 210);
-            this.lblKursorPos.Name = "lblKursorPos";
-            this.lblKursorPos.Size = new System.Drawing.Size(35, 13);
-            this.lblKursorPos.TabIndex = 7;
-            this.lblKursorPos.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1085, 576);
-            this.Controls.Add(this.lblKursorPos);
-            this.Controls.Add(this.txtMap);
-            this.Controls.Add(this.btnRandomMap);
+            this.ClientSize = new System.Drawing.Size(711, 576);
             this.Controls.Add(this.picFlames);
             this.Controls.Add(this.lstIsland);
             this.Controls.Add(this.lstMap);
@@ -135,7 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFlames)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -146,10 +111,7 @@
         private System.Windows.Forms.ListBox lstIsland;
         private System.Windows.Forms.PictureBox picFlames;
         private System.Windows.Forms.Timer tmrFlames;
-        private System.Windows.Forms.Button btnRandomMap;
-        private System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.Timer tmrMain;
-        private System.Windows.Forms.Label lblKursorPos;
     }
 }
 
