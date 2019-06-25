@@ -191,6 +191,9 @@ namespace IslandsApp1
                     g.DrawImage(Kursor[0], new Rectangle(KursorX, KursorY, 48, 24));
                 else
                     g.DrawImage(Kursor[1], new Rectangle(KursorX, KursorY, 48, 24));
+
+
+                g.DrawLine(new Pen(Color.Red, 1), DateTime.Now.Millisecond/30, 0, 60-DateTime.Now.Millisecond/30, 50);
             }
             pic.Image = finalImage;
             GC.Collect();
