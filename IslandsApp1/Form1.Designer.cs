@@ -35,15 +35,17 @@
 			this.picFlames = new System.Windows.Forms.PictureBox();
 			this.tmrFlames = new System.Windows.Forms.Timer(this.components);
 			this.tmrMain = new System.Windows.Forms.Timer(this.components);
+			this.btnClearFire = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picFlames)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pic
 			// 
+			this.pic.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.pic.Location = new System.Drawing.Point(93, 12);
 			this.pic.Name = "pic";
-			this.pic.Size = new System.Drawing.Size(587, 534);
+			this.pic.Size = new System.Drawing.Size(550, 480);
 			this.pic.TabIndex = 0;
 			this.pic.TabStop = false;
 			this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
@@ -51,7 +53,6 @@
 			// 
 			// lstMap
 			// 
-			this.lstMap.Enabled = false;
 			this.lstMap.FormattingEnabled = true;
 			this.lstMap.Location = new System.Drawing.Point(12, 12);
 			this.lstMap.Name = "lstMap";
@@ -61,7 +62,6 @@
 			// 
 			// lstIsland
 			// 
-			this.lstIsland.Enabled = false;
 			this.lstIsland.FormattingEnabled = true;
 			this.lstIsland.Location = new System.Drawing.Point(12, 87);
 			this.lstIsland.Name = "lstIsland";
@@ -86,11 +86,22 @@
 			this.tmrMain.Interval = 500;
 			this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
 			// 
+			// btnClearFire
+			// 
+			this.btnClearFire.Location = new System.Drawing.Point(12, 162);
+			this.btnClearFire.Name = "btnClearFire";
+			this.btnClearFire.Size = new System.Drawing.Size(75, 23);
+			this.btnClearFire.TabIndex = 4;
+			this.btnClearFire.Text = "button1";
+			this.btnClearFire.UseVisualStyleBackColor = true;
+			this.btnClearFire.Click += new System.EventHandler(this.btnClearFire_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(702, 576);
+			this.ClientSize = new System.Drawing.Size(664, 507);
+			this.Controls.Add(this.btnClearFire);
 			this.Controls.Add(this.picFlames);
 			this.Controls.Add(this.lstIsland);
 			this.Controls.Add(this.lstMap);
@@ -113,6 +124,7 @@
         private System.Windows.Forms.PictureBox picFlames;
         private System.Windows.Forms.Timer tmrFlames;
         private System.Windows.Forms.Timer tmrMain;
+		private System.Windows.Forms.Button btnClearFire;
 	}
 }
 
