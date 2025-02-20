@@ -47,7 +47,7 @@ namespace IslandsApp1
 			str.Close();
 		}
 
-		private void RedValidPlaces()
+		private void ReadValidPlaces(int IslandNum)
 		{
 
 			try
@@ -55,9 +55,27 @@ namespace IslandsApp1
 				string[] separatingStrings = { Environment.NewLine };
 
 
-				string[] words = res.island1d.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
+				string[] words = null;
+
+				switch (IslandNum)
+				{
+					case 0:
+						words = res.island1d.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
+						break;
+					case 1:
+						words = res.island2d.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
+						break;
+					case 2:
+						words = res.island3d.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
+						break;
+					case 3:
+						words = res.island4d.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
+						break;
+				}
 
 
+
+				ValidPlace.Clear();
 				for (int i = 0; i < words.Count(); i += 2)
 					ValidPlace.Add(new Point(int.Parse(words[i]), int.Parse(words[i + 1])));
 			}
@@ -71,7 +89,9 @@ namespace IslandsApp1
 
 		private void Form1_Load(object sender, EventArgs e)
 		{ // 587; 534
-			RedValidPlaces();
+			ReadValidPlaces(0);
+
+			MakeBuildMenu(res.menu);
 
 			pic.Width = 552;
 			pic.Height = 480;
@@ -118,6 +138,23 @@ namespace IslandsApp1
 			tmrMain.Enabled = true;
 		}
 
+		private void MakeBuildMenu(Bitmap bmp)
+		{
+			rbBuildMissileSilo.Image = bmp.Clone(new Rectangle(0, 0, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbBuildShieldGenerator.Image = bmp.Clone(new Rectangle(0, 30, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbBuildPowerPlant.Image = bmp.Clone(new Rectangle(0, 60, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbBuildAirField.Image = bmp.Clone(new Rectangle(0, 90, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbBuildLaboratory.Image = bmp.Clone(new Rectangle(0, 120, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbBuildFactory.Image = bmp.Clone(new Rectangle(0, 150, 30, 30), PixelFormat.Format16bppArgb1555);
+			//
+			rbAttackMissile.Image = bmp.Clone(new Rectangle(30, 0, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbAttackAirStrike.Image = bmp.Clone(new Rectangle(30, 30, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbAttackArtillery.Image = bmp.Clone(new Rectangle(30, 60, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbAttackSpySatelite.Image = bmp.Clone(new Rectangle(30, 90, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbAttackNuke.Image = bmp.Clone(new Rectangle(30, 120, 30, 30), PixelFormat.Format16bppArgb1555);
+			rbAttackShield.Image = bmp.Clone(new Rectangle(30, 150, 30, 30), PixelFormat.Format16bppArgb1555);
+		}
+
 		private void PrepareFlames(Bitmap bmp)
 		{
 			Flames.Clear();
@@ -133,7 +170,6 @@ namespace IslandsApp1
 		private void PrepareExplosions(Bitmap bmp)
 		{
 			Explosions.Clear();
-			Rectangle rect;
 			for (int i = 0; i < 6; i++)
 			{
 				Explosions.Add(bmp.Clone(new Rectangle(i * 26, 0, 26, 26), PixelFormat.Format16bppArgb1555));
@@ -190,11 +226,11 @@ namespace IslandsApp1
 
 				if (ValidCursorFlag)
 					g.DrawImage(Kursor[0], new Rectangle(KursorX, KursorY, 48, 24));
-				else
+				//else
 					g.DrawImage(Kursor[1], new Rectangle(KursorX, KursorY, 48, 24));
 
 
-				g.DrawLine(new Pen(Color.Red, 5), DateTime.Now.Second*3, 0, 60-DateTime.Now.Second, 50);
+				//g.DrawLine(new Pen(Color.Red, 5), DateTime.Now.Second*3, 0, 60-DateTime.Now.Second, 50);
 			}
 			pic.Image = finalImage;
 			GC.Collect();
@@ -215,7 +251,11 @@ namespace IslandsApp1
 
 		private void lstIsland_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (DoneLoadFlag) MakeLevel(lstMap.SelectedIndex, lstIsland.SelectedIndex);
+			if (DoneLoadFlag)
+			{
+				ReadValidPlaces(lstIsland.SelectedIndex);
+				MakeLevel(lstMap.SelectedIndex, lstIsland.SelectedIndex);
+			}
 		}
 
 		private void tmrFlames_Tick(object sender, EventArgs e)
@@ -321,7 +361,6 @@ namespace IslandsApp1
 
 		private void pic_MouseDown(object sender, MouseEventArgs e)
 		{
-			Text="X: "+ e.X + "   Y: " + e.Y;
 			if (ValidCursorFlag)
 			{
 				if (!ExplosionFlag)
@@ -336,7 +375,17 @@ namespace IslandsApp1
 
 		private void btnClearFire_Click(object sender, EventArgs e)
 		{
+			KraterTiles.Clear();
+		}
 
+		private void rbBuildMissileSilo_MouseEnter(object sender, EventArgs e)
+		{
+			lblBuildInfo.Text=((RadioButton)sender).Tag.ToString();
+		}
+
+		private void rbBuildMissileSilo_MouseLeave(object sender, EventArgs e)
+		{
+			lblBuildInfo.Text = "";
 		}
 	}
 }
