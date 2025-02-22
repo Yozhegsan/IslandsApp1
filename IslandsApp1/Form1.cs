@@ -25,7 +25,7 @@ namespace IslandsApp1
 		List<Point> KraterTiles = new List<Point>();
 		Point ExplosionXY = new Point();
 		bool ExplosionFlag = false;
-		Bitmap[] Kursor = new Bitmap[2];
+		Bitmap[] Kursor = new Bitmap[4];
 		Bitmap GreenTile;
 		int KursorX = 0;
 		int KursorY = 0;
@@ -97,8 +97,11 @@ namespace IslandsApp1
 			pic.Height = 480;
 
 
+
 			Kursor[0] = res.rectangles.Clone(new Rectangle(0, 24, 48, 24), PixelFormat.Format16bppArgb1555);
 			Kursor[1] = res.rectangles.Clone(new Rectangle(48, 24, 48, 24), PixelFormat.Format16bppArgb1555);
+			Kursor[2] = res.rectangles.Clone(new Rectangle(0, 0, 48, 24), PixelFormat.Format16bppArgb1555);
+			Kursor[3] = res.rectangles.Clone(new Rectangle(48, 0, 48, 24), PixelFormat.Format16bppArgb1555);
 
 			Rectangle rect = new Rectangle(48, 0, 48, 24);
 			GreenTile = res.rectangles.Clone(rect, PixelFormat.Format16bppArgb1555);
@@ -226,7 +229,7 @@ namespace IslandsApp1
 
 				if (ValidCursorFlag)
 					g.DrawImage(Kursor[0], new Rectangle(KursorX, KursorY, 48, 24));
-				//else
+				else
 					g.DrawImage(Kursor[1], new Rectangle(KursorX, KursorY, 48, 24));
 
 
@@ -253,6 +256,7 @@ namespace IslandsApp1
 		{
 			if (DoneLoadFlag)
 			{
+				KraterTiles.Clear();
 				ReadValidPlaces(lstIsland.SelectedIndex);
 				MakeLevel(lstMap.SelectedIndex, lstIsland.SelectedIndex);
 			}
@@ -380,12 +384,22 @@ namespace IslandsApp1
 
 		private void rbBuildMissileSilo_MouseEnter(object sender, EventArgs e)
 		{
-			lblBuildInfo.Text=((RadioButton)sender).Tag.ToString();
+			lblBuildInfo.Text = ((RadioButton)sender).Tag.ToString();
 		}
 
 		private void rbBuildMissileSilo_MouseLeave(object sender, EventArgs e)
 		{
 			lblBuildInfo.Text = "";
+		}
+
+		private void rbAttackMissile_MouseEnter(object sender, EventArgs e)
+		{
+			lblAtackInfo.Text = ((RadioButton)sender).Tag.ToString();
+		}
+
+		private void rbAttackMissile_MouseLeave(object sender, EventArgs e)
+		{
+			lblAtackInfo.Text = "";
 		}
 	}
 }
